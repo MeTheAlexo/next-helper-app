@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input'
 import { FormWrapper } from './form-wrapper'
 import { AlertError } from './alert-error'
 
-export default function LoginForm() {
+export function LoginForm() {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -35,6 +35,9 @@ export default function LoginForm() {
     }
     if (error.email) {
       form.setError('email', { message: error.email })
+    }
+    if (error.password) {
+      form.setError('password', { message: error.password })
     }
   }
 

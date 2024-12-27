@@ -1,8 +1,11 @@
-import dynamic from 'next/dynamic'
+import { Metadata } from 'next'
 
 import { GuestOnly } from '@/components/guest-only'
+import { RegisterForm } from '@/components/register-form'
 
-const RegisterForm = dynamic(() => import('@/components/register-form'))
+export const metadata: Metadata = {
+  title: 'Регистрация'
+}
 
 export default function Register() {
   return (

@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input'
 import { FormWrapper } from './form-wrapper'
 import { AlertError } from './alert-error'
 
-export default function RegisterForm() {
+export function RegisterForm() {
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
