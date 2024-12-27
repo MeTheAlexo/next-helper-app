@@ -38,6 +38,9 @@ export async function validateSessionToken(token: string) {
           name: true,
           email: true,
           createdAt: true
+        },
+        with: {
+          brigade: true
         }
       }
     }

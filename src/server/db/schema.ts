@@ -1,6 +1,24 @@
 import { relations } from 'drizzle-orm'
 import { pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 import { nanoid } from 'nanoid'
+import { generateInviteCode } from '@/lib/utils'
+
+export const brigade = pgTable('brigades', {
+  id: text('id')
+    .notNull()
+    .primaryKey()
+    .$default(() => nanoid()),
+  name: text('name').notNull(),
+  inviteCode: text('invite_code')
+    .notNull()
+    .$default(() => generateInviteCode()),
+  createdAt: timestamp('created_at', {
+    withTimezone: true,
+    mode: 'date'
+  })
+    .notNull()
+    .$default(() => new Date())
+})
 
 export const user = pgTable('users', {
   id: text('id')
@@ -10,6 +28,7 @@ export const user = pgTable('users', {
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   passwordHash: text('password_hash').notNull(),
+  brigadeId: text('brigade_id'),
   createdAt: timestamp('created_at', {
     withTimezone: true,
     mode: 'date'
@@ -17,6 +36,10 @@ export const user = pgTable('users', {
     .notNull()
     .$default(() => new Date())
 })
+
+export const userRelations = relations(user, ({ one }) => ({
+  brigade: one(brigade, { fields: [user.brigadeId], references: [brigade.id] })
+}))
 
 export const session = pgTable('sessions', {
   id: text('id').notNull().primaryKey(),
