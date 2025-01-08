@@ -3,6 +3,7 @@ import { getCurrentSession } from '@/server/auth'
 
 import { AuthGate } from '@/components/auth-gate'
 import { LogoutButton } from '@/components/logout-button'
+import { BrigadeWidget } from '@/components/brigade-widget'
 
 export const metadata: Metadata = {
   title: 'Профиль'
@@ -14,8 +15,8 @@ export default async function Profile() {
   return (
     <AuthGate>
       <div className="flex flex-col space-y-4">
-        <p>Привет, {user?.name}!</p>
         <LogoutButton />
+        <BrigadeWidget brigade={user?.brigade} />
       </div>
     </AuthGate>
   )

@@ -1,16 +1,16 @@
 'use client'
 
 import { useActionState } from 'react'
-import { logout } from '@/server/actions/logout'
+import { leaveBrigade } from '@/server/actions/leave-brigade'
 
 import { Button } from './ui/button'
 
-export function LogoutButton() {
-  const [_, action, isPending] = useActionState(logout, {})
+export function BrigadeLeaveButton() {
+  const [_, action, isPending] = useActionState(leaveBrigade, {})
   return (
     <form action={action}>
       <Button variant="destructive" className="w-full" disabled={isPending}>
-        Выйти из аккаунта
+        Покинуть бригаду
       </Button>
     </form>
   )

@@ -40,7 +40,16 @@ export async function validateSessionToken(token: string) {
           createdAt: true
         },
         with: {
-          brigade: true
+          brigade: {
+            with: {
+              workers: {
+                columns: {
+                  name: true,
+                  email: true
+                }
+              }
+            }
+          }
         }
       }
     }

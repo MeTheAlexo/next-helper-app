@@ -7,4 +7,5 @@ export const db = drizzle(env.DATABASE_URL, { schema })
 export const table = schema
 
 export type User = InferSelectModel<typeof table.user>
+export type Brigade = InferSelectModel<typeof table.brigade>
 export type Session = InferSelectModel<typeof table.session>
